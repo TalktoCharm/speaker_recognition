@@ -2,6 +2,7 @@ from flask import Flask, request, jsonify
 import torchaudio
 from speechbrain.pretrained import SpeakerRecognition
 from scipy.spatial.distance import cosine
+import os
 
 app = Flask(__name__)
 model = SpeakerRecognition.from_hparams(source="speechbrain/spkrec-ecapa-voxceleb")
@@ -46,4 +47,5 @@ def verify():
     return jsonify({"match": similarity > 0.85, "similarity": similarity})
 
 if __name__ == "__main__":
-    app.run()
+    port = int(os.environ.get("PORT", 5000))  
+    app.run(host="0.0.0.0", port=port)
