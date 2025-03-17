@@ -6,7 +6,7 @@ from speechbrain.pretrained import SpeakerRecognition
 from scipy.spatial.distance import cosine
 
 app = Flask(__name__)
-model = SpeakerRecognition.from_hparams(source="speechbrain/spkrec-ecapa-voxceleb")
+model = SpeakerRecognition.from_hparams(source="speechbrain/spkrec-ecapa-voxceleb", run_opts={"dtype": "float16"})
 
 voiceprints = {}
 data_dir = "data"
