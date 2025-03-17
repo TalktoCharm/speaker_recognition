@@ -20,12 +20,18 @@ voiceprints = {}
 def register():
     phone_number = request.form["phone_number"]
     audio_file = request.files["audio"]
-    
-    audio_path = f"data/{phone_number}.wav"
+
+    # Ensure the "data" directory exists
+    data_dir = "data"
+    os.makedirs(data_dir, exist_ok=True) 
+
+    # Save the audio file
+    audio_path = os.path.join(data_dir, f"{phone_number}.wav")
     audio_file.save(audio_path)
 
+    # Extract voice embedding
     embedding = extract_embedding(audio_path)
-    voiceprints[phone_number] = embedding
+    voiceprints[phone_number] = embedding  # Store in memory (Replace with DB later)
 
     return jsonify({"message": "Voiceprint registered", "phone_number": phone_number})
 
