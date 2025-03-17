@@ -6,3 +6,5 @@ speechbrain==0.5.15
 scipy==1.11.3
 numpy==1.26.3
 requests==2.31.0
+soundfile==0.12.1 
+ffmpeg 
